@@ -5,6 +5,7 @@ public abstract class Fixture {
 	private String shortDescription;
 	private String longDescription;
 	
+	public Fixture() {}
 	public Fixture(String name, String sd, String ld) {
 		this.name = name;
 		this.shortDescription = sd;
@@ -22,4 +23,11 @@ public abstract class Fixture {
 	public String getLongDescription() {
 		return this.longDescription;
 	}
+	@Override
+	public String toString() {
+		return "Fixture [name=" + name + ", shortDescription=" + shortDescription + ", longDescription="
+				+ longDescription + "]";
+	}
+	
+	
 }

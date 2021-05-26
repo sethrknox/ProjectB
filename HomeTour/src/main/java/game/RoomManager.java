@@ -1,5 +1,8 @@
 package game;
 
+import fixtures.Door;
+import fixtures.Inventory;
+import fixtures.Item;
 import fixtures.Room;
 
 public class RoomManager {
@@ -183,8 +186,108 @@ public class RoomManager {
 		
 		// Populate outside
 		outside.setExit("north", frontEntrance);
+		
+		
+		
+		// Add doors between every pair of rooms
+		// 
+		Door entranceOutside = new Door();
+		Door entranceMusic = new Door();
+		Door entranceDen = new Door();
+		
+		Door livingMusic = new Door();
+		Door livingBath = new Door();
+		Door livingDining = new Door();
+		
+		Door kitchenDining = new Door();
+		Door kitchenDen = new Door();
+		
+		Door topOfStairsLibrary = new Door();
+		Door topOfStairsFirstBed = new Door();
+		Door topOfStairsSecondBed = new Door();
+		
+		Door firstBedStudy = new Door();
+		
+		Door secondBedStudy = new Door();
+		Door secondBedBath = new Door();
+		
+		Door libraryNook = new Door();
+		Door libraryBalcony = new Door();
+		
+		Door bottomOfStairsCellar = new Door("Cellar Door", "sd", "ld");
+		
+		// Populate first floor doors
+		frontEntrance.setDoor("south", entranceOutside);
+		frontEntrance.setDoor("east", entranceDen);
+		//frontEntrance.setDoor("south", outside);
+		frontEntrance.setDoor("west", entranceMusic);
+		
+		den.setDoor("north", kitchenDen);
+		den.setDoor("west", entranceDen);
+		
+		musicRoom.setDoor("north", livingMusic);
+		musicRoom.setDoor("east", entranceMusic);
+		
+		livingRoom.setDoor("west", livingBath);
+		livingRoom.setDoor("east", livingDining);
+		livingRoom.setDoor("south", livingMusic);
+		
+		firstBath.setDoor("east", livingBath);
+		
+		diningRoom.setDoor("west", livingDining);
+		diningRoom.setDoor("east", kitchenDining);
+		
+		kitchen.setDoor("south", kitchenDen);
+		kitchen.setDoor("west", kitchenDining);
+		
+		// Populate second floor doors
+		topOfStairs.setDoor("north", topOfStairsLibrary);
+		topOfStairs.setDoor("east", topOfStairsFirstBed);
+		topOfStairs.setDoor("west", topOfStairsSecondBed);
+		
+		firstBedroom.setDoor("south", firstBedStudy);
+		firstBedroom.setDoor("west", topOfStairsFirstBed);
+		
+		firstStudy.setDoor("north", firstBedStudy);
+		
+		secondBedroom.setDoor("north", secondBedBath);
+		secondBedroom.setDoor("east", topOfStairsSecondBed);
+		secondBedroom.setDoor("south", secondBedStudy);
+		
+		secondStudy.setDoor("north", secondBedStudy);
+		
+		secondBathroom.setDoor("south", secondBedBath);
+		
+		library.setDoor("north", libraryBalcony);
+		library.setDoor("east", libraryNook);
+		library.setDoor("south", topOfStairsLibrary);
+		
+		nook.setDoor("west", libraryNook);
+		
+		balcony.setDoor("south", libraryBalcony);
+		
+		// Populate basement doors
+		bottomOfStairs.setDoor("south", bottomOfStairsCellar);
+		
+		cellar.setDoor("north", bottomOfStairsCellar);
+		
+		// Populate outside doors
+		outside.setDoor("north", entranceOutside);
 				
 		this.startingRoom = outside;
+		
+		// Adding items
+		Item key = new Item("Cellar Key", "The key to the cellar", "ld");
+		Inventory temp = secondStudy.getInventory();
+		temp.addItem(key);
+		
+		// Open some of the doors to start
+		entranceDen.setStatus(true);
+		kitchenDen.setStatus(true);
+		topOfStairsLibrary.setStatus(true);
+		
+		// Lock the cellar door
+		bottomOfStairsCellar.setLock(true);
 	}
 	
 	public Room getStartingRoom() {
